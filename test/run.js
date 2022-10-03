@@ -2,7 +2,11 @@ const {Parser} = require('../src/Parser');
 
 const parser = new Parser();
 
-const prg = `"12"`;
+const prg = ` 
+    // single line comment
+       
+    "12" 
+`;
 
 const ast = parser.parse(prg);
 
