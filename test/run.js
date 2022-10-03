@@ -2,7 +2,7 @@ const {Parser} = require('../src/Parser');
 
 const parser = new Parser();
 
-const prg = '101';
+const prg = `"12"`;
 
 const ast = parser.parse(prg);
 

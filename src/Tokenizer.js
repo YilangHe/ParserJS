@@ -4,6 +4,10 @@ class Tokenizer {
         this._cursor = 0;
     }
 
+    isEOF() {
+        return this._cursor == this._string.length;
+    }
+
     hasMoreTokens() {
         return this._cursor < this._string.length;
     }
@@ -14,9 +18,9 @@ class Tokenizer {
         }
 
         const string = this._string.slice(this._cursor);
-
+        console.log(string[0]);
         // Numbers
-        if(!Number.isNaN(string[0])) {
+        if(!Number.isNaN(Number(string[0]))) {
             let number = '';
             while(!Number.isNaN(Number(string[this._cursor]))) {
                 number += string[this._cursor++];
@@ -24,6 +28,21 @@ class Tokenizer {
             return {
                 type: 'NUMBER',
                 value: number, 
+            }
+        }
+
+        // String
+        else if(string[0] === '"') {
+            let s = '';
+            do {
+                s += string[this._cursor ++];
+            } while(string[this._cursor] !== '"' && !this.isEOF());
+            if(string[this._cursor] === '"') {
+                s += string[this._cursor++]; 
+            }
+            return {
+                type: 'STRING',
+                value: s, 
             }
         }
 
